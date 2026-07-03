@@ -14,7 +14,7 @@ from matplotlib.animation import FFMpegWriter, FuncAnimation, PillowWriter, writ
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 from matplotlib.gridspec import GridSpec
 
-from phipy_plots.colors import colors
+from phipy_plots.color import colors
 
 plt.style.use("default")
 plt.rcParams["axes.prop_cycle"] = cycler(color=colors)

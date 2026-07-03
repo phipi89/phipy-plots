@@ -12,7 +12,7 @@ from matplotlib.colors import cnames
 from PIL import Image
 from plotly.subplots import make_subplots
 
-from phipy_plots.colors import (
+from phipy_plots.color import (
     Color,
     Colors,
     black,

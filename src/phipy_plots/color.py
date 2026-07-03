@@ -155,6 +155,8 @@ class Color(str):
 
 
 class Colors(list):
+    fallback = Color("#CFCCC0")
+
     def __init__(self, color_list=None, recursive=True, kind=None):
         if color_list is not None:
             base = [color_list] if _is_rgb_sequence(color_list) else list(color_list)
@@ -162,9 +164,8 @@ class Colors(list):
             base = list(_PALETTES[kind])
         else:
             base = list(_PLOTLY_DEFAULT_COLORS)
-        color_list = base
-        self.discrete = color_list + 20 * ["#CFCCC0"]
-        self.discrete = [Color(c) for c in self.discrete]
+
+        super().__init__(Color(c) for c in base)
 
         self.grayscale = [reduce_opacity(black, 1 / i) for i in range(1, 11)]
 
@@ -188,23 +189,27 @@ class Colors(list):
         self.B = Color("#7BA3D1")
         self.C = Color("#A5DAC5")
 
-    def __iter__(self):
-        return iter(self.discrete)
+    @property
+    def discrete(self):
+        return self
 
     def __getitem__(self, index):
         if isinstance(index, bool):
             if index:
-                return self.discrete[0]
+                return list.__getitem__(self, 0)
             else:
-                return self.discrete[1]
+                return list.__getitem__(self, 1)
+
+        if isinstance(index, (int, np.integer)):
+            try:
+                return list.__getitem__(self, index)
+            except IndexError:
+                return self.fallback
 
         try:
-            return [self.discrete[i] for i in np.asarray(index).astype(int)]
-        except Exception:
-            return self.discrete[index]
-
-    def __len__(self):
-        return len(self.discrete)
+            return [self[i] for i in np.asarray(index).astype(int)]
+        except (TypeError, ValueError):
+            return list.__getitem__(self, index)
 
     def __call__(self, arg):
         if isinstance(arg, np.ndarray):
