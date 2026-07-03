@@ -1,0 +1,23 @@
+[project]
+name = "phipy-plots"
+version = "0.1.0"
+description = "Lightweight plotting utilities related to phipy."
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "colorhash>=2.1.0",
+    "colorlover>=0.3.0",
+    "colorutils>=0.3.0",
+    "cycler",
+    "ipython",
+    "matplotlib>=3.9.4",
+    "networkx",
+    "numpy>=2.4.0",
+    "pillow",
+    "plotly>=6.2.0",
+    "scipy>=1.13.1",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

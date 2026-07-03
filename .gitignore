@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+
+# Build and packaging artifacts
+build/
+dist/
+*.egg-info/
+
+# macOS
+.DS_Store
+._*
+
+# editors
+.opencode/
+.zed/
+.vscode/
+.idea/
